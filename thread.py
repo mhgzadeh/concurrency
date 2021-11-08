@@ -32,8 +32,9 @@ def get_page(number):
 def show_prime(worker_id):
     while True:
         number = q.get()
-        is_prime(number)
+        result = is_prime(number)
         q.task_done()
+        print(f"worker id: {worker_id}\t result: {result}")
         if q.empty():
             break
 
@@ -68,7 +69,8 @@ def multi_thread():
              When python script finish, the threads will be ended even though
              their task has not been finished
         """
-        # t.setDaemon(True)
+        print(t.name)
+        t.setDaemon(True)
         t.start()
 
     print("Thread not join yet")
